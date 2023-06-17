@@ -1,14 +1,19 @@
 package org.javaboy.ds.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -19,7 +24,7 @@ import java.util.Collection;
  * @since 2023-06-16
  */
 @TableName("sys_user")
-public class User implements Serializable, UserDetails {
+public class User extends BaseEntity implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -119,6 +124,19 @@ public class User implements Serializable, UserDetails {
      */
     private String remark;
 
+    @TableField(exist = false)
+    private List<Role> roles;
+
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+
     public Long getUserId() {
         return userId;
     }
@@ -193,7 +211,7 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles.stream().map(r->new SimpleGrantedAuthority(r.getRoleKey())).collect(Collectors.toList());
     }
 
     public String getPassword() {
@@ -304,25 +322,25 @@ public class User implements Serializable, UserDetails {
     @Override
     public String toString() {
         return "User{" +
-            "userId = " + userId +
-            ", deptId = " + deptId +
-            ", userName = " + userName +
-            ", nickName = " + nickName +
-            ", userType = " + userType +
-            ", email = " + email +
-            ", phonenumber = " + phonenumber +
-            ", sex = " + sex +
-            ", avatar = " + avatar +
-            ", password = " + password +
-            ", status = " + status +
-            ", delFlag = " + delFlag +
-            ", loginIp = " + loginIp +
-            ", loginDate = " + loginDate +
-            ", createBy = " + createBy +
-            ", createTime = " + createTime +
-            ", updateBy = " + updateBy +
-            ", updateTime = " + updateTime +
-            ", remark = " + remark +
-        "}";
+                "userId = " + userId +
+                ", deptId = " + deptId +
+                ", userName = " + userName +
+                ", nickName = " + nickName +
+                ", userType = " + userType +
+                ", email = " + email +
+                ", phonenumber = " + phonenumber +
+                ", sex = " + sex +
+                ", avatar = " + avatar +
+                ", password = " + password +
+                ", status = " + status +
+                ", delFlag = " + delFlag +
+                ", loginIp = " + loginIp +
+                ", loginDate = " + loginDate +
+                ", createBy = " + createBy +
+                ", createTime = " + createTime +
+                ", updateBy = " + updateBy +
+                ", updateTime = " + updateTime +
+                ", remark = " + remark +
+                "}";
     }
 }

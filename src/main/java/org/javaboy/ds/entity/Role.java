@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @since 2023-06-16
  */
 @TableName("sys_role")
-public class Role implements Serializable {
+public class Role extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

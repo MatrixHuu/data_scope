@@ -1,7 +1,10 @@
 package org.javaboy.ds.mapper;
 
+import org.javaboy.ds.entity.Role;
 import org.javaboy.ds.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    List<Role> getRolesByUid(Long userId);
 }

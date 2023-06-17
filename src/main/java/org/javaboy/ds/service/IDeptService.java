@@ -3,6 +3,8 @@ package org.javaboy.ds.service;
 import org.javaboy.ds.entity.Dept;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 部门表 服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IDeptService extends IService<Dept> {
 
+    List<Dept> getAllDepts(Dept dept);
 }

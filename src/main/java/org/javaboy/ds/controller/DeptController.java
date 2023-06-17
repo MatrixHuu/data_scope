@@ -26,7 +26,7 @@ public class DeptController {
     IDeptService deptService;
 
     @GetMapping("/")
-    public List<Dept> getAllDepts() {
-        return deptService.list();
+    public List<Dept> getAllDepts(Dept dept) {
+        return deptService.getAllDepts(dept);
     }
 }
