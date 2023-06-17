@@ -1,7 +1,14 @@
 package org.javaboy.ds.controller;
 
+import org.javaboy.ds.entity.Dept;
+import org.javaboy.ds.service.IDeptService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -11,8 +18,15 @@ import org.springframework.stereotype.Controller;
  * @author xyma
  * @since 2023-06-16
  */
-@Controller
+@RestController
 @RequestMapping("/dept")
 public class DeptController {
 
+    @Autowired
+    IDeptService deptService;
+
+    @GetMapping("/")
+    public List<Dept> getAllDepts() {
+        return deptService.list();
+    }
 }
