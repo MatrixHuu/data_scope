@@ -3,6 +3,8 @@ package org.javaboy.ds.service;
 import org.javaboy.ds.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户信息表 服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+    List<User> getAllUsers(User user);
 }

@@ -1,6 +1,7 @@
 package org.javaboy.ds.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.javaboy.ds.annotation.DataScope;
 import org.javaboy.ds.entity.User;
 import org.javaboy.ds.mapper.UserMapper;
 import org.javaboy.ds.service.IUserService;
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -34,5 +37,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         user.setRoles(userMapper.getRolesByUid(user.getUserId()));
         return user;
+    }
+
+    @Override
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<User> getAllUsers(User user) {
+        return userMapper.getAllUsers(user);
     }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -125,6 +126,7 @@ public class User extends BaseEntity implements Serializable, UserDetails {
     private String remark;
 
     @TableField(exist = false)
+    @JsonIgnore
     private List<Role> roles;
 
 
@@ -210,6 +212,7 @@ public class User extends BaseEntity implements Serializable, UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map(r->new SimpleGrantedAuthority(r.getRoleKey())).collect(Collectors.toList());
     }
