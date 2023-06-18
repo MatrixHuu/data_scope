@@ -45,7 +45,7 @@ public class DataScopeAspect {
             } else if (DATA_SCOPE_DEPT.equals(ds)) {
                 sql.append(String.format(" OR %s.dept_id=%d", dataScope.deptAlias(), user.getDeptId()));
             } else if (DATA_SCOPE_DEPT_AND_CHILD.equals(ds)) {
-                sql.append(String.format(" OR %s.dept_id in(select dept_id from sys_dept where dept_id=%d or find_in_set(%d,'ancestors'))", dataScope.deptAlias(), user.getDeptId(), user.getDeptId()));
+                sql.append(String.format(" OR %s.dept_id in(select dept_id from sys_dept where dept_id=%d or find_in_set(%d, `ancestors`))", dataScope.deptAlias(), user.getDeptId(), user.getDeptId()));
             } else if (DATA_SCOPE_SELF.equals(ds)) {
                 String s = dataScope.userAlias();
                 if ("".equals(s)) {
